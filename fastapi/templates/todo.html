@@ -1,0 +1,45 @@
+{% extends "home.html" %}
+
+{% block todo_container %}
+<main class="container-fluid">
+    <hr>
+    <article align="center">
+        <form method="post">
+            <div>
+                <input type="text"
+                    name="item"
+                    placeholder="Purchase Packt's Python workshop course"
+                    size="80">
+                <button type="submit">
+                    Add Todo
+                </button>
+            </div>
+        </form>
+    </article>
+    <br>
+    {% if todo %}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Todo ID: {{ todo.id }}</h4>
+            <p class="card-text">
+                Item: {{ todo.item.item }}<br>
+                Status: {{ todo.item.status }}
+            </p>
+        </div>
+    </div>
+    {% else %}
+    <article>
+        <h2 align="center">Todos</h2>
+        <br>
+        {% for todo in todos %}
+        <div class="card">
+            <div class="card-body">
+                {{ loop.index }}. <a href="/todo/{{ loop.index }}">{{ todo.item.item }}</a>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </article>
+    {% endif %}
+</main>
+{% endblock %}
